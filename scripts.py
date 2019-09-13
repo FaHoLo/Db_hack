@@ -4,8 +4,6 @@ from datacenter.models import Schoolkid
 from datacenter.models import Commendation
 
 
-#TODO сделать меньше запросов к бд с помощью подгрузки если возможно
-
 def get_schoolkid_object(child_name):
     child = Schoolkid.objects.get(full_name__contains=child_name)
     return child
