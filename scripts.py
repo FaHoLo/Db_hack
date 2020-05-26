@@ -1,20 +1,26 @@
 import random
+
+from datacenter.models import Chastisement
+from datacenter.models import Commendation
+from datacenter.models import Lesson
 from datacenter.models import Mark
 from datacenter.models import Schoolkid
-from datacenter.models import Commendation
 
 
 def get_schoolkid_object(child_name):
     child = Schoolkid.objects.get(full_name__contains=child_name)
     return child
 
+
 def fix_marks(child_name):
     child = get_schoolkid_object(child_name)
     Mark.objects.filter(schoolkid=child, points__lt=4).update(points=5)
 
+
 def remove_chastisements(child_name):
     child = get_schoolkid_object(child_name)
     Chastisement.objects.filter(schoolkid=child).delete()
+
 
 def create_commendation(child_name, subject_name):
     commendations = [
